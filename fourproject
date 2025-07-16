@@ -1,0 +1,33 @@
+<forms.py>
+
+from django import forms
+from .models import Todo
+
+class TodoForm(forms.ModelForm):
+    class Meta:
+        model = Todo
+        fields = "__all__"
+
+
+
+<admin.py>
+
+from django.contrib import admin
+from .models import Todo
+
+admin.site.register(Todo)
+
+
+
+
+<urls.py>
+
+from django.contrib import admin
+from django.urls import path
+from myapp import views
+
+urlpatterns = [
+    path('', views.index, name="todo"),
+    path('del/<str:item_id>', views.remove, name="del"),
+    path('admin/', admin.site.urls),
+]
